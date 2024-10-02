@@ -1,0 +1,7 @@
+{% for m in messages %} 
+	{% if m.tags == 'success' %}
+		<p class="bg-success text-white">{{m}}</p>
+	{% else %}
+		<p class="bg-danger text-white">{{m}}</p>
+	{% endif %} 
+{% endfor %}

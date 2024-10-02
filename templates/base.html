@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="Task Management App"/>
+		<meta name="keywords" content="task manager app"/>
+		<meta name="viewport" content="width=device-width" />
+		<title>{% block title %} Home {% endblock title %} || Task Manager</title>
+		<!-- Bootstrap CSS -->
+		<link href="{% static "css/bootstrap/bootstrap.min.css" %}" rel="stylesheet">
+	</head>
+	<body>
+		{% include "toast.html" %}
+		{% include "navbar.html" %}
+		<main class="container mt-4">
+			{% block content %}
+			<!-- All the Content Goes Here -->
+			{% endblock content %}
+		</main>
+
+		<!-- Scripts Section -->
+		<!-- Bootstrap Related -->
+		<script src="{% static "js/bootstrap/popper.min.js" %}"></script>
+		<script src="{% static "js/bootstrap/bootstrap.min.js" %}"></script>
+
+	</body>
+</html>
