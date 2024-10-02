@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     # ----------------------
     # Apps
+    "car",
+    "order_car",
 ]
 
 MIDDLEWARE = [
