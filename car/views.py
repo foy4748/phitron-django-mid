@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
@@ -32,7 +33,7 @@ def ShowCarAndBrandList(req):
     return render(req, "car/car_list.html", context=ctx)
 
 
-class ShowCarAddForm(CreateView):
+class ShowCarAddForm(LoginRequiredMixin, CreateView):
     model = Car
     form_class = AddCarForm
     success_url = reverse_lazy("car:car_list")
@@ -47,7 +48,7 @@ class ShowCarAddForm(CreateView):
         return super().form_valid(form)
 
 
-class ShowBrandAddForm(CreateView):
+class ShowBrandAddForm(LoginRequiredMixin, CreateView):
     model = Brand
     form_class = AddBrandForm
     success_url = reverse_lazy("car:car_list")
