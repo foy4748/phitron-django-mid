@@ -35,6 +35,7 @@
 							<p class="card-text mt-2">{{ object.description }}</p>
 							<p class="card-text mt-2">{{ object.quantity }}</p>
 							<p class="card-text mt-2">{{ object.price }}</p>
+							<a href="{% url 'car:car_detail' pk=object.id %}">Buy</a>
 						</div>
 					</div>
 				</div>

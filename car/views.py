@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.contrib import messages
 
 from car.forms import AddBrandForm, AddCarForm
@@ -50,3 +50,7 @@ class ShowBrandAddForm(CreateView):
         messages.success(self.request, success_message)
 
         return super().form_valid(form)
+
+
+class ShowCarDetail(DetailView):
+    model = Car
