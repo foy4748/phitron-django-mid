@@ -19,8 +19,9 @@ class ShowCarAddForm(CreateView):
     success_url = reverse_lazy("car:car_list")
 
     def form_valid(self, form):
-        brand = form.cleaned_data.brand_name
-        car_model = form.cleaned_data.car_model
+        print(form.cleaned_data)
+        brand = form.cleaned_data["brand"]
+        car_model = form.cleaned_data["car_model"]
         success_message = f"Added a new car: {brand} | {car_model}"
         messages.success(self.request, success_message)
 

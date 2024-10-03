@@ -6,7 +6,8 @@ from car.models import Brand, Car
 class AddCarForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = "__all__"
+        # fields = "__all__"
+        exclude = ("createdAt",)
 
 
 class AddBrandForm(forms.ModelForm):
