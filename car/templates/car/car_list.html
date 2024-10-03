@@ -1,6 +1,14 @@
 {% extends "base.html" %} 
 {% load humanize %}
-{% block title %} Cars {% endblock title %} 
+
+{% block title %}
+	{% if is_filtered is True %}
+		{{ brand.brand_name }} 
+	{% else %}
+		Cars
+	{% endif %}
+{% endblock title %} 
+
 {% block content %}
 <div class="container">
 	<div class="row">

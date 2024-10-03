@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     # ----------------------
     # Apps
+    "auth_app",
     "car",
     "order_car",
 ]

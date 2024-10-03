@@ -12,7 +12,10 @@ from car.models import Brand, Car
 def ShowCarAndBrandList(req):
     brand_list = Brand.objects.all()
     brand_id = req.GET.get("brand_id")
+
     is_filtered = False
+    brand = None
+
     if brand_id is None:
         car_list = Car.objects.all()
     else:
@@ -20,7 +23,12 @@ def ShowCarAndBrandList(req):
         car_list = Car.objects.filter(brand=brand)
         is_filtered = True
 
-    ctx = {"car_list": car_list, "brand_list": brand_list, "is_filtered": is_filtered}
+    ctx = {
+        "car_list": car_list,
+        "brand_list": brand_list,
+        "is_filtered": is_filtered,
+        "brand": brand,
+    }
     return render(req, "car/car_list.html", context=ctx)
 
 

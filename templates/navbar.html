@@ -26,6 +26,20 @@
           <a class="nav-link" href="{% url 'car:car_list' %}">Show Cars</a>
         </li>
       </ul>
+      <ul class="navbar-nav m-auto">
+		{% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "auth:logout" %}">log out</a>
+        </li>
+		{% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "auth:registration_form" %}">Register</a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" href="{% url "auth:login_form" %}">Login</a>
+        </li>
+		{% endif %}
+      </ul>
     </div>
   </div>
 </nav>

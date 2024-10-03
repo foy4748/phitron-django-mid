@@ -22,9 +22,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("", include("car.urls")),
     path("car_orders/", include("order_car.urls")),
+    path("auth/", include("auth_app.urls")),
+    # Admin page
+    path("admin/", admin.site.urls),
 ]
 
 # Adding Media Config URL at the end
