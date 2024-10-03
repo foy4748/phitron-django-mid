@@ -1,8 +1,12 @@
 from django.urls import path
-from django.views.generic import TemplateView
+
+# from django.views.generic import TemplateView
+
+from . import views
 
 app_name = "car"
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="base.html")),
+    path("", views.ShowCarList.as_view(), name="car_list"),
+    path("add_car/", views.ShowCarAddForm.as_view(), name="add_car_form"),
 ]

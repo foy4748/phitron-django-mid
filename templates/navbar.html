@@ -12,18 +12,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="/">Task Manager</a>
+      <a class="navbar-brand" href="/">Car Sales</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'task:add_task_form' %}">Add Task</a>
+          <a class="nav-link" href="{% url 'car:add_car_form' %}">Add Car</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'category:add_category_form' %}"
-            >Add Category</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'task:show_tasks' %}">Show Tasks</a>
+          <a class="nav-link" href="{% url 'car:car_list' %}">Show Cars</a>
         </li>
       </ul>
     </div>
