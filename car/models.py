@@ -14,7 +14,7 @@ class Car(models.Model):
     car_model = models.CharField(max_length=1024)
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
 
-    car_image = models.ImageField(upload_to="car/media/uploads", blank=True, null=True)
+    car_image = models.ImageField(upload_to="car/uploads/", blank=True, null=True)
     description = models.TextField(max_length=5120)
     quantity = models.IntegerField()
     price = models.FloatField()
