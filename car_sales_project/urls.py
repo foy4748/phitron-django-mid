@@ -20,6 +20,7 @@ from django.urls import include, path
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", include("car.urls")),
@@ -27,6 +28,8 @@ urlpatterns = [
     path("auth/", include("auth_app.urls")),
     # Admin page
     path("admin/", admin.site.urls),
+    # Test page
+    path("test/", TemplateView.as_view(template_name="test.html"), name="test_page"),
 ]
 
 # Adding Media Config URL at the end
