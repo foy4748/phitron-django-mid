@@ -41,9 +41,20 @@
 		{% else %}
 		<p>Please <a href="{% url "auth:login_form" %}?next={{request.path}}">Login</a> to comment</p>
 		{% endif %}
-		{% for singleComment in comments  %}
-			<li>{{singleComment.comment}}</li>
-		{% endfor %}
+		<div class="container mt-4">
+			{% for singleComment in comments  %}
+			<div class="card bg-slate-100 mb-3">
+				<div class="card-header d-flex justify-content-between">
+					<p class="p-0 m-0">@{{singleComment.user.username}}</p>
+					<p class="p-0 m-0">{{ singleComment.createdAt|timesince }} ago</p>
+				</div>
+				<div class="card-body">
+					<p class="card-text">{{singleComment.comment}}</p>
+				</div>
+			</div>
+			{% endfor %}
+
+		</div>
 		<!-- END of Comment Section -->
 		
 	</div>

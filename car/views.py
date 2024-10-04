@@ -68,27 +68,27 @@ class ShowCarDetail(View):
 
     def get(self, request, *_, **kwargs):
         car = get_object_or_404(Car, pk=kwargs["pk"])
-        comments = Comment.objects.filter(car=car)
+        comments = Comment.objects.filter(car=car).order_by("-createdAt")
         form = AddCommentForm()
         context = {"car": car, "comments": comments, "form": form, "pk": kwargs["pk"]}
         return render(request, self.template_name, context)
 
-    def post(self, request, *args, **kwargs):
-        car = get_object_or_404(Car, pk=kwargs["pk"])
-        form = AddCommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.car = car
-            comment.user = request.user
-            comment.save()
-            return self.get(request, *args, **kwargs)
-        comments = Comment.objects.filter(car=car)
-        context = {
-            "car": car,
-            "comments": comments,
-            "form": form,
-        }
-        return render(request, self.template_name, context)
+    # def post(self, request, *args, **kwargs):
+    #     car = get_object_or_404(Car, pk=kwargs["pk"])
+    #     form = AddCommentForm(request.POST)
+    #     if form.is_valid():
+    #         comment = form.save(commit=False)
+    #         comment.car = car
+    #         comment.user = request.user
+    #         comment.save()
+    #         return self.get(request, *args, **kwargs)
+    #     comments = Comment.objects.filter(car=car)
+    #     context = {
+    #         "car": car,
+    #         "comments": comments.order_by("-createdAt"),
+    #         "form": form,
+    #     }
+    #     return render(request, self.template_name, context)
 
 
 # Throwing out this code
