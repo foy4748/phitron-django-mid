@@ -1,0 +1,10 @@
+{% load crispy_forms_tags %}
+
+<form
+  method="post"
+  class="pt-4"
+  action="{% url 'comment:add_comment' car_id=pk user_id=request.user.id %}"
+>
+  {% csrf_token %} {{ form|crispy }}
+  <button type="submit" class="btn btn-primary mt-2">Submit</button>
+</form>

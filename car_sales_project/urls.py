@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("car.urls")),
     path("car_orders/", include("order_car.urls")),
     path("auth/", include("auth_app.urls")),
+    path("comment/", include("comment.urls")),
     # Admin page
     path("admin/", admin.site.urls),
     # Test page

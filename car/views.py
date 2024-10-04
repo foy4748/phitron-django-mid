@@ -6,6 +6,7 @@ from django.contrib import messages
 
 from car.forms import AddBrandForm, AddCarForm
 from car.models import Brand, Car
+from comment.forms import AddCommentForm
 
 # Create your views here.
 
@@ -61,5 +62,16 @@ class ShowBrandAddForm(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ShowCarDetail(DetailView):
+class ShowCarDetail(DetailView, CreateView):
     model = Car
+    context_object_name = "car"
+    template_name = "car/car_detail.html"
+    form_class = AddCommentForm
+
+    # Thanks to Co-pilot
+    # For Returning the Form
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.get_form()
+        context["pk"] = self.kwargs["pk"]
+        return context
