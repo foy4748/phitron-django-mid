@@ -1,0 +1,9 @@
+{% block title %} My Orders {% endblock title %} {% block content %}
+<ul>
+  {% for car_order in object_list %}
+  <li>
+    {{ car_order.car_id.car_model }} | {{ car_order.car_id.brand.brand_name }}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}

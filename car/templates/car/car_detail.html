@@ -20,7 +20,7 @@
       <p class="card-text mt-2">{{ object.quantity }}</p>
       <p class="card-text mt-2">{{ object.price }}</p>
 	  {% if	request.user.is_authenticated %}
-	  <a href="#" class="btn btn-primary">Buy</a>
+	  <a href="{% url "order_car:place_order" pk=object.id %}" class="btn btn-primary">Buy</a>
 	  {% else %}
 	  <a href="{% url "auth:login_form" %}?next={{ request.path }}" class="btn btn-primary">Login to Buy</a>
 	  {% endif %}

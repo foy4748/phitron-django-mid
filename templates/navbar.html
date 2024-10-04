@@ -29,7 +29,10 @@
       <ul class="navbar-nav m-auto">
 		{% if request.user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url "auth:logout" %}">log out</a>
+          <a class="nav-link" href="{% url "order_car:my_orders" %}">My Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "auth:logout" %}">Log out</a>
         </li>
 		{% else %}
         <li class="nav-item">
