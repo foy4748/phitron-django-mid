@@ -1,12 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, View
 from django.contrib import messages
 
 from car.forms import AddBrandForm, AddCarForm
 from car.models import Brand, Car
 from comment.forms import AddCommentForm
+from comment.models import Comment
 
 # Create your views here.
 
@@ -62,16 +63,48 @@ class ShowBrandAddForm(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ShowCarDetail(DetailView, CreateView):
-    model = Car
-    context_object_name = "car"
+class ShowCarDetail(View):
     template_name = "car/car_detail.html"
-    form_class = AddCommentForm
 
-    # Thanks to Co-pilot
-    # For Returning the Form
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["form"] = self.get_form()
-        context["pk"] = self.kwargs["pk"]
-        return context
+    def get(self, request, *_, **kwargs):
+        car = get_object_or_404(Car, pk=kwargs["pk"])
+        comments = Comment.objects.filter(car=car)
+        form = AddCommentForm()
+        context = {"car": car, "comments": comments, "form": form, "pk": kwargs["pk"]}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        car = get_object_or_404(Car, pk=kwargs["pk"])
+        form = AddCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.car = car
+            comment.user = request.user
+            comment.save()
+            return self.get(request, *args, **kwargs)
+        comments = Comment.objects.filter(car=car)
+        context = {
+            "car": car,
+            "comments": comments,
+            "form": form,
+        }
+        return render(request, self.template_name, context)
+
+
+# Throwing out this code
+# Due to dependency on both
+# DetailView, CreateView and ListView
+####
+# class ShowCarDetail(DetailView, CreateView):
+#     model = Car
+#     context_object_name = "car"
+#     template_name = "car/car_detail.html"
+#     form_class = AddCommentForm
+
+#     # Thanks to Co-pilot
+#     # For Returning the Form
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["form"] = self.get_form()
+#         context["pk"] = self.kwargs["pk"]
+#         return context
