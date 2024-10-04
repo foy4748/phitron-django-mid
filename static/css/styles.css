@@ -2,9 +2,15 @@ p {
   margin: 5px 0;
   padding: 0;
 }
+
 .bg-slate-100 {
   background-color: rgb(241 245 249);
 }
+
+.object-cover {
+  object-fit: cover;
+}
+
 .object-scale-down {
   object-fit: scale-down;
 }

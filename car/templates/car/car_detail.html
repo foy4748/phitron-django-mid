@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-12 col-md-6">
       <img
-        class="img img-fluid w-100 h-100"
+        class="img img-fluid w-100 h-100 object-cover"
         src="{{ car.car_image.url }}"
         alt="{{ car.car_model }} {{ car.brand.brand_name }}"
       />
@@ -33,9 +33,19 @@
 		<p class="fw-bold">Description</p>
 		<p class="card-text mt-2">{{ car.description }}</p>
 
+	</div>
+	<div>
+		{% if	request.user.is_authenticated %}
 		<!-- Comment Section -->
 		{% include "comment/comment_form.html" %}
+		{% else %}
+		<p>Please <a href="{% url "auth:login_form" %}?next={{request.path}}">Login</a> to comment</p>
+		{% endif %}
+		{% for singleComment in comments  %}
+			<li>{{singleComment.comment}}</li>
+		{% endfor %}
 		<!-- END of Comment Section -->
+		
 	</div>
   </div>
 </div>
