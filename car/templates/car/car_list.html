@@ -2,11 +2,11 @@
 {% load humanize %}
 
 {% block title %}
-	{% if is_filtered is True %}
-		{{ brand.brand_name }} 
-	{% else %}
-		Cars
-	{% endif %}
+{% if is_filtered is True %}
+{{ brand.brand_name }} 
+{% else %}
+Cars
+{% endif %}
 {% endblock title %} 
 
 {% block content %}
@@ -28,7 +28,8 @@
 
 				<!-- Showing Car count if filtered -->
 				{% if is_filtered is True %}
-				<p class="fw-bold">Found Results : {{ car_list|length }}</p>
+				<h1 class="mb-4">{{ brand.brand_name }}</h1>
+				<p class="fw-bold mb-3">Found Results : {{ car_list|length }}</p>
 				{% endif %}
 
 				<!-- Looping through Objects -->
@@ -36,14 +37,16 @@
 				{% for object in car_list %}
 				<div class="col-12 col-md-6 col-lg-4">
 					<div class="card h-100">
-						<img class="card-img-top" src="{{ object.car_image.url }}" alt="{{ object.car_model }} {{ object.brand.brand_name }}">
+						<figure class="h-100 bg-slate-100">
+							<img class="card-img-top img img-fluid h-100 max-h-[300px] object-scale-down" src="{{ object.car_image.url }}" alt="{{ object.car_model }} {{ object.brand.brand_name }}">
+
+						</figure>
 						<div class="card-body d-flex flex-column justify-content-between">
 							<h5 class="card-title">{{ object.brand.brand_name }} | {{ object.car_model }}</h5>
 							<h6 class="card-subtitle mb-2 text-body-secondary">{{ object.createdAt|timesince }} ago</h6>
-							<p class="card-text mt-2">{{ object.description }}</p>
-							<p class="card-text mt-2">{{ object.quantity }}</p>
-							<p class="card-text mt-2">{{ object.price }}</p>
-							<a href="{% url 'car:car_detail' pk=object.id %}">Buy</a>
+							<p>Quantity: {{ object.quantity }}</p>
+							<p>Price: $ {{ object.price }}</p>
+							<a class="mt-2 btn btn-outline-primary btn-sm" href="{% url 'car:car_detail' pk=object.id %}">Buy</a>
 						</div>
 					</div>
 				</div>

@@ -7,12 +7,15 @@
 		<meta name="keywords" content="task manager app"/>
 		<meta name="viewport" content="width=device-width" />
 		<title>{% block title %} Home {% endblock title %} || Car Sales</title>
-		<!-- Bootstrap CSS -->
+		<!-- Loading CSS -->
+		<!-- -- Bootstrap CSS -->
 		<link href="{% static "css/bootstrap/bootstrap.min.css" %}" rel="stylesheet">
+		<!-- -- Custom CSS -->
+		<link href="{% static "css/styles.css" %}" rel="stylesheet">
 	</head>
 	<body>
-		{% include "toast.html" %}
 		{% include "navbar.html" %}
+		{% include "toast.html" %}
 		<main class="container mt-4">
 			{% block content %}
 			<!-- All the Content Goes Here -->

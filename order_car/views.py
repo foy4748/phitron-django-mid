@@ -42,4 +42,6 @@ class OrderList(LoginRequiredMixin, ListView):
     # https://stackoverflow.com/questions/38471260/django-filtering-by-user-id-in-class-based-listview
 
     def get_queryset(self):
-        return CarOrder.objects.filter(buyer_id=self.request.user)
+        return CarOrder.objects.filter(buyer_id=self.request.user).order_by(
+            "-order_date"
+        )
