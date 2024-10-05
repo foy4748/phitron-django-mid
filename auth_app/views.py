@@ -3,6 +3,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+
+from django.urls import reverse_lazy
+
 from auth_app.forms import RegisterForm
 
 
@@ -30,7 +35,7 @@ def ShowRegistrationForm(req):
                 messages.error(req, "FAILED to Login")
                 return redirect("/")
 
-    return render(req, "auth/registration_form.html", {"form": form})
+    return render(req, "auth_app/registration_form.html", {"form": form})
 
 
 def ShowLoginForm(req):
@@ -53,10 +58,24 @@ def ShowLoginForm(req):
             messages.error(req, "FAILED to Login")
             return redirect("/")
 
-    return render(req, "auth/login_form.html", {"form": form})
+    return render(req, "auth_app/login_form.html", {"form": form})
 
 
 def LogoutUser(req):
     logout(req)
     messages.success(req, "Logged Out")
     return redirect("/")
+
+
+class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy("car:car_list")
+    template_name = "auth_app/change_password.html"
+
+    def form_valid(self, form):
+        messages.success(self.request, "Changed password successfully")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "FAILED to Change password")
+        return super().form_invalid(form)

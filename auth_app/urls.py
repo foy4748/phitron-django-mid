@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 app_name = "auth"
 
 urlpatterns = [
@@ -8,4 +9,7 @@ urlpatterns = [
     path("register/", views.ShowRegistrationForm, name="registration_form"),
     path("login/", views.ShowLoginForm, name="login_form"),
     path("logout/", views.LogoutUser, name="logout"),
+    path(
+        "password-change/", views.ChangePasswordView.as_view(), name="change_password"
+    ),
 ]
