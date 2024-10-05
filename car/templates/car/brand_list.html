@@ -1,7 +1,7 @@
 <!-- {% block title %} Brands {% endblock title %} --> 
 
 {% block content %}
-<div class="d-flex justify-content-around w-100 mb-4">
+<div class="d-flex justify-content-around w-100 my-4">
 	<a class="btn btn-outline-primary" href="/"><p>All</p></a>
 	{% for brand in brand_list %}
 	<a class="btn btn-outline-primary"  href="./?brand_id={{brand.id}}"><p>{{ brand.brand_name }}</p>
