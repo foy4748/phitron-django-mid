@@ -12,10 +12,7 @@ Cars
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="col-12 col-lg-2">
 			{% include "car/brand_list.html" %}
-		</div>
-		<div class="col-12 col-lg-10">
 			<div class="row">
 				<!-- Showing Message if no task exists -->
 				{% if car_list is None or car_list|length == 0 %}
@@ -56,7 +53,6 @@ Cars
 
 			</div>
 
-		</div>
 	</div>
 
 </div>
