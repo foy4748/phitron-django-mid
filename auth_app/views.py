@@ -7,8 +7,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 
 from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
 
-from auth_app.forms import RegisterForm
+from auth_app.forms import ChangeProfileForm, RegisterForm
 
 
 # Create your views here.
@@ -79,3 +80,13 @@ class ChangePasswordView(PasswordChangeView):
     def form_invalid(self, form):
         messages.error(self.request, "FAILED to Change password")
         return super().form_invalid(form)
+
+
+class ChangeProfileView(UpdateView):
+    form_class = ChangeProfileForm
+    success_url = reverse_lazy("car:car_list")
+    template_name = "auth_app/change_profile.html"
+
+    def get_object(self, queryset=None):
+        # This method is used to get the instance of the object to be updated
+        return self.request.user
