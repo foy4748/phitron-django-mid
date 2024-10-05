@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
@@ -39,27 +39,44 @@ def ShowRegistrationForm(req):
     return render(req, "auth_app/registration_form.html", {"form": form})
 
 
-def ShowLoginForm(req):
-    form = AuthenticationForm()
-    if req.POST:
-        print("Logining in User")
-        form = AuthenticationForm(req.POST)
-        uname = req.POST.get("username")
-        pword = req.POST.get("password")
-        print(uname, pword)
-        current_user = authenticate(username=uname, password=pword)
-        if current_user is not None:
-            print("Logged in successfully")
-            login(req, current_user)
-            messages.success(req, "Logged in successfully")
-            next_url = req.GET.get("next", "/")
-            return redirect(next_url)
-        else:
-            print("FAILED to Login")
-            messages.error(req, "FAILED to Login")
-            return redirect("/")
+class ShowLoginForm(LoginView):
+    form_class = AuthenticationForm
+    template_name = "auth_app/login_form.html"
 
-    return render(req, "auth_app/login_form.html", {"form": form})
+    def get_success_url(self):
+        next_url = self.request.GET.get("next", "car:car_list")
+        return reverse_lazy(next_url)
+
+    def form_valid(self, form):
+        messages.success(self.request, "Logged in successfully")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "FAILED to Login")
+        return super().form_invalid(form)
+
+
+# def ShowLoginForm(req):
+#     form = AuthenticationForm()
+#     if req.POST:
+#         print("Logining in User")
+#         form = AuthenticationForm(req.POST)
+#         uname = req.POST.get("username")
+#         pword = req.POST.get("password")
+#         print(uname, pword)
+#         current_user = authenticate(username=uname, password=pword)
+#         if current_user is not None:
+#             print("Logged in successfully")
+#             login(req, current_user)
+#             messages.success(req, "Logged in successfully")
+#             next_url = req.GET.get("next", "/")
+#             return redirect(next_url)
+#         else:
+#             print("FAILED to Login")
+#             messages.error(req, "FAILED to Login")
+#             return redirect("/")
+
+#     return render(req, "auth_app/login_form.html", {"form": form})
 
 
 def LogoutUser(req):
