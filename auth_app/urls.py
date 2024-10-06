@@ -8,7 +8,7 @@ urlpatterns = [
     # For Django Hard Reload
     path("register/", views.ShowRegistrationForm.as_view(), name="registration_form"),
     path("login/", views.ShowLoginForm.as_view(), name="login_form"),
-    path("logout/", views.LogoutUser, name="logout"),
+    path("logout/", views.LogoutUser.as_view(), name="logout"),
     path(
         "password-change/", views.ChangePasswordView.as_view(), name="change_password"
     ),

@@ -8,7 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, View
 from django.views.generic.edit import UpdateView
 
 from auth_app.forms import ChangeProfileForm, RegisterForm
@@ -52,10 +52,11 @@ class ShowLoginForm(LoginView):
         return super().form_invalid(form)
 
 
-def LogoutUser(req):
-    logout(req)
-    messages.success(req, "Logged Out")
-    return redirect("/")
+class LogoutUser(View):
+    def get(self, req):
+        logout(req)
+        messages.success(req, "Logged Out")
+        return redirect("/")
 
 
 class ChangePasswordView(PasswordChangeView):
