@@ -35,17 +35,19 @@
 
 	</div>
 	<div>
-		{% if	request.user.is_authenticated %}
 		<!-- Comment Section -->
+		<!-- Comment Form -->
 		{% include "comment/comment_form.html" %}
-		{% else %}
-		<p>Please <a href="{% url "auth:login_form" %}?next={{request.path}}">Login</a> to comment</p>
-		{% endif %}
+		<!-- Comment List -->
 		<div class="container mt-4">
 			{% for singleComment in comments  %}
 			<div class="card bg-slate-100 mb-3">
 				<div class="card-header d-flex justify-content-between">
-					<p class="p-0 m-0">@{{singleComment.user.username}}</p>
+					{% if singleComment.commenter_name is not None %}
+					<p class="p-0 m-0">@{{singleComment.commenter_name}}</p>
+					{% else %}
+					<p class="p-0 m-0">@anonymous</p>
+					{% endif %}
 					<p class="p-0 m-0">{{ singleComment.createdAt|timesince }} ago</p>
 				</div>
 				<div class="card-body">
