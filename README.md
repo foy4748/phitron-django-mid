@@ -10,6 +10,8 @@ password:  TestTest$1
 
 # Instructions    
 
+- DEMO Video - [Google Doc](https://drive.google.com/file/d/13kSBi_1IyY5cwjB_wW6FrnQUk_t5Ef6o/view?usp=drive_link)
+
 - Requirement Doc : [Google Doc](https://docs.google.com/document/d/1pLcG3WdbIZTBpHkk5d-wsDfIMedyEjssNPvLFjh1wA4/edit)    
 
 After cloning this repository, you need to initiate a virtual environment. Then install necessary packages within it.
