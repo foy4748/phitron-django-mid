@@ -25,7 +25,7 @@ def PlaceOrder(req, pk):
         print(newOrder)
         success_message = f"Place a new order: {car.brand} | {car.car_model}"
         messages.success(req, success_message)
-        nextUrl = reverse("car:car_list")
+        nextUrl = reverse("order_car:my_orders")
         return HttpResponseRedirect(nextUrl)
     else:
         error_message = f"Failed to order"
