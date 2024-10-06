@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -21,7 +22,7 @@ class ShowRegistrationForm(CreateView):
     template_name = "auth_app/registration_form.html"
 
     def get_success_url(self):
-        next_url = self.request.GET.get("next", reverse_lazy("car:car_list"))
+        next_url = self.request.GET.get("next", reverse_lazy("order_car:my_orders"))
         return next_url
 
     def form_valid(self, form):
@@ -40,7 +41,7 @@ class ShowLoginForm(LoginView):
     template_name = "auth_app/login_form.html"
 
     def get_success_url(self):
-        next_url = self.request.GET.get("next", reverse_lazy("car:car_list"))
+        next_url = self.request.GET.get("next", reverse_lazy("order_car:my_orders"))
         return next_url
 
     def form_valid(self, form):
@@ -52,14 +53,14 @@ class ShowLoginForm(LoginView):
         return super().form_invalid(form)
 
 
-class LogoutUser(View):
+class LogoutUser(LoginRequiredMixin, View):
     def get(self, req):
         logout(req)
         messages.success(req, "Logged Out")
         return redirect("/")
 
 
-class ChangePasswordView(PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy("order_car:my_orders")
     template_name = "auth_app/change_password.html"
@@ -73,7 +74,7 @@ class ChangePasswordView(PasswordChangeView):
         return super().form_invalid(form)
 
 
-class ChangeProfileView(UpdateView):
+class ChangeProfileView(LoginRequiredMixin, UpdateView):
     form_class = ChangeProfileForm
     success_url = reverse_lazy("order_car:my_orders")
     template_name = "auth_app/change_profile.html"

@@ -1,3 +1,13 @@
+# Test Credentials
+
+```
+// Test User Account
+
+username:  test
+password:  TestTest$1
+
+```
+
 # Instructions    
 
 - Requirement Doc : [Google Doc](https://docs.google.com/document/d/1pLcG3WdbIZTBpHkk5d-wsDfIMedyEjssNPvLFjh1wA4/edit)    
